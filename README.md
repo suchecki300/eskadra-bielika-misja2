@@ -82,24 +82,28 @@ Przykładowy kod źródłowy zawarty w tym repozytorium pozwala w szczególnośc
 
 ## 1. Przygotowanie projektu Google Cloud i konfiguracja zmiennych środowiskowych
 
-1. Uzyskaj kredyt Cloud **OnRamp**, lub skonfiguruj płatności w projekcie Google Cloud
+1. Uruchom przeglądarkę w **trybie incognito**.
 
 2. Przejdź do **Google Cloud Console**: [console.cloud.google.com](https://console.cloud.google.com)
+   
+3. Zaloguj się na konto frictionless, które otrzymałeś od agetaGrega. 
 
-3. Stwórz nowy projekt Google Cloud i wybierz go aby był aktywny
+4. Wybierz projekt **Bielik ... ...**
 >[!TIP]
 >Możesz sprawdzić dostępność kredytów OnRamp wybierając z menu po lewej stronie: Billing / Credits
 
-4. Otwórz Cloud Shell ([dokumentacja](https://cloud.google.com/shell/docs))
+![Screenshot 01 - Wybór projektu](architecture/assets/wybor_projektu.png)
 
-5. Zweryfikuj konto które jest zalogowane w Cloud Shell
+1. Otwórz terminal Cloud Shell ([dokumentacja](https://cloud.google.com/shell/docs))
+
+2. Zweryfikuj konto które jest zalogowane w Cloud Shell
    ```bash
    gcloud auth list
    ```
 >[!TIP]
 >Jeżeli konto nie jest zalogowane, lub jest to inne konto niż to z dostępem do Twojego projektu Google Cloud, zaloguj się za pomocą komendy: `gcloud auth login`
 
-6. Potwierdź, że wybrany jest odpowiedni projekt Google Cloud
+1. Potwierdź, że wybrany jest odpowiedni projekt Google Cloud
    ```bash
    gcloud config get project
    ```
@@ -532,19 +536,7 @@ Skrypt sprawdza zmienne środowiskowe, trzy usługi Cloud Run (`bielik`, `embedd
 | Billing/`OnRamp` nieaktywny, usługi się nie tworzą | Brak powiązanych kredytów | Aktywuj kredyt OnRamp i powiąż z projektem (Billing → Credits) |
 | GPU niedostępne w regionie | Limit/quota w regionie | Sprawdź dostępność GPU w `$REGION` lub poproś o zwiększenie quoty |
 
-## 12. Sprzątanie po warsztacie
-
-Aby usunąć usługi i uniknąć kosztów (zwłaszcza GPU):
-
-```bash
-source setup_env.sh
-bash cleanup.sh
-```
-
-> [!CAUTION]
-> `cleanup.sh` nieodwracalnie usuwa usługi Cloud Run (`bielik`, `embedding-gemma`, `orchestration-api`) oraz dataset BigQuery. Wymaga potwierdzenia.
-
-## 13. Tablica postępu na żywo i certyfikat
+## 12. Tablica postępu na żywo i certyfikat
 
 Twój postęp pojawia się na **tablicy wyników na rzutniku** — pod Twoim **nickiem** (bez danych osobowych). Postęp meldują **checkpointy** uruchamiane po każdym kroku (bloki „✅ Zalicz krok" w sekcjach 1–9). Każdy zalicza punkty (łącznie 100) i wysyła wynik na tablicę.
 
@@ -568,7 +560,7 @@ Twój postęp pojawia się na **tablicy wyników na rzutniku** — pod Twoim **n
 > [!TIP]
 > **Eksperymentuj!** Przejrzyj `orchestration/main.py` oraz `orchestration/static/index.html`, aby zobaczyć, jak prosto w Pythonie łączy się wyszukiwanie wektorowe BigQuery z modelem LLM. Spróbuj zmienić instrukcję systemową w `main.py`, aby Bielik zachowywał się jak pirat lub ekspert IT (po zmianie wdróż ponownie: `cd orchestration && ./cloud_run.sh`), pobaw się suwakiem liczby dokumentów w UI i dodaj własną regułę przyciskiem „Dodaj regułę", a potem o nią zapytaj.
 
-## 14. Dla chętnych — pogłębione zrozumienie z Gemini CLI `~30 min` *(opcjonalne)*
+## 13. Dla chętnych — pogłębione zrozumienie z Gemini CLI `~30 min` *(opcjonalne)*
 
 > [!NOTE]
 > To **bonus po warsztacie** — masz certyfikat, system działa, a chcesz zrozumieć **dlaczego** każdy krok wygląda tak, a nie inaczej? Zadaj pytania poniżej Gemini CLI. Odpowiedź modelu może brzmieć inaczej niż u kolegi i **to jest OK** — modele są niedeterministyczne. Liczy się budowanie własnego modelu mentalnego.
@@ -584,18 +576,8 @@ Twój postęp pojawia się na **tablicy wyników na rzutniku** — pod Twoim **n
 
 Zbudowany system to dopiero początek — każdy fragment możesz zmienić. Najłatwiej zacząć od kolorów Web UI.
 
-**Wariant A — ręcznie (CSS).** Web UI trzyma kolory w zmiennych CSS na górze `orchestration/static/index.html` (sekcja `:root`).
-1. Odblokuj plik do edycji (na warsztacie bywa tylko do odczytu):
-   ```bash
-   chmod +w orchestration/static/index.html
-   ```
-2. W sekcji `:root` podmień kolor akcentu, np. `--bielik-teal:#1B5E6B;` → `--bielik-teal:#7C3AED;` (fiolet).
-3. Wdróż ponownie i odśwież stronę:
-   ```bash
-   cd orchestration && ./cloud_run.sh && cd ..
-   ```
+Niech AI przerobi motyw za Ciebie:
 
-**Wariant B — Gemini CLI.** Niech AI przerobi motyw za Ciebie:
 ```bash
 chmod +w orchestration/static/index.html
 gemini "Zmodyfikuj plik @orchestration/static/index.html: zmień motyw na ciemny (dark mode) z akcentem fioletowym. Zachowaj całą funkcjonalność i strukturę HTML. Nie uruchamiaj pliku."
@@ -634,6 +616,18 @@ gemini "Prześledź krok po kroku, co dzieje się w endpoincie /ask: od wektora 
 
 > [!TIP]
 > Zadaj też **własne** pytania, np. *„Jak zmodyfikować @orchestration/main.py, żeby /ask zwracał czas każdego etapu (embedding, BigQuery, Bielik)?"* lub *„Jak dodać dzielenie długich dokumentów na fragmenty (chunking) przed indeksowaniem?"*. To naturalne przejście od *zrozumienia* do *modyfikacji*.
+
+## 14. Sprzątanie po warsztacie
+
+Aby usunąć usługi i uniknąć kosztów (zwłaszcza GPU):
+
+```bash
+source setup_env.sh
+bash cleanup.sh
+```
+
+> [!CAUTION]
+> `cleanup.sh` nieodwracalnie usuwa usługi Cloud Run (`bielik`, `embedding-gemma`, `orchestration-api`) oraz dataset BigQuery. Wymaga potwierdzenia.
 
 ## 15. Co dalej? — rozwijaj swój system RAG
 
