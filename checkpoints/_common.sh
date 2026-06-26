@@ -6,7 +6,7 @@ _CERT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/cert_artifacts"
 
 TOTAL_STEPS=9
 # Projekt centralny, do którego trafia postęp (tablica na rzutniku). Override: export TRACKING_PROJECT=...
-TRACKING_PROJECT="${TRACKING_PROJECT:-agentgreg-bielik-misja2}"
+TRACKING_PROJECT="${TRACKING_PROJECT:-btslocal-198817}"
 
 _STEP_LABELS=(
   ""                                  # indeks 0 nieużywany
