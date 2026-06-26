@@ -17,7 +17,7 @@ export WORKSHOP_LAST_NAME="Nazwisko"         # do certyfikatu
 export WORKSHOP_EMAIL="email@przyklad.pl"    # do certyfikatu
 # ============================================================
 # Projekt centralny prowadzącego (postęp). Ustaw "disabled" aby nie wysyłać na tablicę.
-export TRACKING_PROJECT="${TRACKING_PROJECT:-agentgreg-bielik-misja2}"
+export TRACKING_PROJECT="${TRACKING_PROJECT:-btslocal-198817}"
 
 echo "Wczytano zmienne środowiskowe"
 if [ "$WORKSHOP_NICK" = "TwojNick" ] || [ -z "$WORKSHOP_NICK" ]; then
