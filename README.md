@@ -127,7 +127,7 @@ Przykładowy kod źródłowy zawarty w tym repozytorium pozwala w szczególnośc
 
 8. Przejdź do katalogu z kodem źródłowym
    ```bash
-   cd eskadra-bielik-misja2
+   cd eskadra-bielika-misja2
    ```
 
 9. Uruchom edytor w katalogu z kodem źródłowym
