@@ -122,7 +122,7 @@ Przykładowy kod źródłowy zawarty w tym repozytorium pozwala w szczególnośc
 
 7. Sklonuj repozytorium z przykładowym kodem i przejdź do nowoutworzonego katalogu
    ```bash
-   git clone https://github.com/agentGreg/eskadra-bielik-misja2
+   git clone https://github.com/suchecki300/eskadra-bielika-misja2
    ```
 
 8. Przejdź do katalogu z kodem źródłowym
